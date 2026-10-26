@@ -4,14 +4,13 @@ from pathlib import Path
 from langchain.agents import create_agent
 from pydantic import BaseModel, Field
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 GLOSSARY_FILE = BASE_DIR / "data" / "glossary.json"
 
 def load_glossary() -> dict:
     with open(GLOSSARY_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
-    return {item["term"].lower(): item["description"] for item in data}
+    return {k.lower(): v for k, v in data.items()}
 
 GLOSSARY = load_glossary()
 
